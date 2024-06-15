@@ -22,10 +22,12 @@
   "dependencies": {
     "@biconomy/account": "^4.4.6",
     "@generationsoftware/hyperstructure-client-js": "^1.13.3",
+    "@types/node-schedule": "^2.1.7",
     "@types/nodemailer": "^6.4.15",
     "@wagmi/core": "^2.11.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.13",
     "tslib": "^2.6.3",
     "viem": "^2.13.10"

@@ -19,10 +19,10 @@ export const sendEmail = async(email: string, ens: string, amount: string) => {
         const rewardEmail = {
             from: `Rewards @ susu.club <${process.env.USER}>`,
             to: email, // Dynamic recipient email address
-            subject: 'susu club rewards',
+            subject: 'susu club incentive',
             html: `
               <p>Dear ${ens},</p>
-              <p>Your reward ${amount} has been awarded to your account for loyal saving habits.</p>
+              <p>Your incetive ${amount} has been awarded to your account for for your contributions to the pool.</p>
               <p>You dont have to do anything, kindly check your balance when you have a second. stay safe!</p>
             `,
         };
