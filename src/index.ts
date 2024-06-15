@@ -4,7 +4,6 @@ import { createSmartAccount, smartUserOP } from './utils/biconomy/smartUserOP.js
 
 const app: Express = express();
 const port = process.env.PORT || 8000;
-let unwatch: (() => void) | undefined;
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Express + TypeScript Server");
@@ -13,7 +12,11 @@ app.get("/", (req: Request, res: Response) => {
 //run function once every week
 // Schedule the task to run every Monday at 8:00 AM
 const job = schedule.scheduleJob({ hour: 8, minute: 0, dayOfWeek: 1 }, function() {
-    smartUserOP();
+    //calc current time stamp now
+    const now = new Date().getTime();
+    //calc one week ago
+    const oneWeekAgo = now - (7 * 24 * 60 * 60 * 1000);
+    smartUserOP(BigInt(oneWeekAgo), BigInt(now));
 });
 
 

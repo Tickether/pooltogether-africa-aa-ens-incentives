@@ -46,6 +46,7 @@ export interface TWAB {
     sharesAmount: bigint
     transferTx: Transaction
 }
+
 function chunkUserOpsArray(arr: Transaction[], maxTxData: number) {
     const chunkUserOps = [];
     for (let i = 1; i < arr.length; i += maxTxData) {
@@ -81,7 +82,7 @@ const withdrawIncentives = async() => {
     }
 }
 
-const poolIncentivesDistro = async() => {
+const poolIncentivesDistro = async( startTime: bigint, endTime: bigint) => {
     let poolersTWAB: TWAB[]
     // get all users (get twab and filter)
     const poolers = await getPoolers()
@@ -92,7 +93,7 @@ const poolIncentivesDistro = async() => {
         //calc amount to send and push
         const poolerAddress = poolers![i];
         //get pooler twab
-        const poolerTWAB_ = await poolerTWAB(przUSDC, poolerAddress, BigInt('1000000'), BigInt('1000000'))
+        const poolerTWAB_ = await poolerTWAB(przUSDC, poolerAddress, startTime, endTime)
         if (poolerTWAB_ > BigInt(0)) {
             //get pooler email
             const pooler = await getPooler(poolerAddress)
@@ -162,7 +163,7 @@ const poolIncentivesDistro = async() => {
 }
 
 
-export const smartUserOP = async() => {
+export const smartUserOP = async( startTime: bigint, endTime: bigint) => {
 
     try {
             
@@ -170,7 +171,7 @@ export const smartUserOP = async() => {
 
         await withdrawIncentives()
         
-        await poolIncentivesDistro()
+        await poolIncentivesDistro(startTime, endTime)
             
     } catch (error) {
         console.log(error)
