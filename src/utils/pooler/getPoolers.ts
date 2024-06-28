@@ -5,7 +5,8 @@ export const getPoolers = async ()=>{
         const res = await fetch('https://susu.club/api/getPoolers', {
             method: 'POST',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'x-api-key': `${process.env.SUSU_API_KEY}`
             },
         })
         const poolers: `0x${string}`[] = await res.json()

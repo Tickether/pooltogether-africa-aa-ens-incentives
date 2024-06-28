@@ -9,7 +9,8 @@ export const postPoolerIncentives = async (
         const res = await fetch('https://susu.club/api/postIncentive', {
             method: 'POST',
             headers: {
-            'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'x-api-key': `${process.env.SUSU_API_KEY}`
             },
             body: JSON.stringify({
                 address,
